@@ -123,11 +123,6 @@ int main()
     for (int i : list)
         cout << i << " ";
     
-    #ifdef _WIN32
-        system("PAUSE");
-    #elif __linux__
-        cin.get();
-    #endif
 
     return 0;
 }
