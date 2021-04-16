@@ -3,7 +3,7 @@
 #include <vector>
 #include <chrono>
 #include <thread>
-#define LENGTH 2 // YOU CAN CHANGE THIS
+#define LENGTH 2 // YOU CAN CHANGE THIS TOO
 #define WIDTH 2  // THIS TOO
 using namespace std;
 
@@ -80,7 +80,7 @@ public:
         count++;
         // this_thread::sleep_for(chrono::milliseconds(250)); uncomment for a surprise (jk)
 
-        if (count % size == 0)
+        if (count % size == 0 && count != size*(size+1))
         {
             this_thread::sleep_for(chrono::milliseconds(1000));
             #ifdef _WIN32
@@ -108,7 +108,7 @@ void bubbleSort(int arr[], int size, vector<Bar> sortedBars)
 
 int main()
 {
-    int list[] = {4, 5, 3, 9, 8, 11}; // ONLY EDIT THIS
+    int list[] = {4, 5, 3, 9, 8}; // ONLY EDIT THIS
     size = sizeof(list) / sizeof(list[0]);
     vector<Bar> bars;
 
@@ -116,6 +116,16 @@ int main()
         bars.push_back(Bar(list[i]));
 
     bubbleSort(list, size, bars);
+    
+    cout << "Sorted List: ";
+    for (int i : list)
+        cout << i << " ";
+    
+    #ifdef _WIN32
+        system("PAUSE");
+    #elif __linux__
+        cin.get();
+    #endif
 
     return 0;
 }
