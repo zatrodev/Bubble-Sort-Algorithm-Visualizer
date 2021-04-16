@@ -1,3 +1,7 @@
+#ifdef _WIN32
+#include <windows.h>
+HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+#endif
 #include <cstdlib>
 #include <iostream>
 #include <vector>
@@ -17,8 +21,10 @@ private:
 
 public:
     int length;
+    int guideIndex;
+    int highIndex;
 
-    Bar(int length) : length(length)
+    Bar(int length, int guideIndex, int highIndex) : length(length), guideIndex(guideIndex), highIndex(highIndex)
     {
         displayBar();
     }
@@ -48,7 +54,8 @@ public:
                 {
                     if (j == WIDTH * length * 2)
                     {
-                        for (int i = 0; i < to_string(length).length(); i++){
+                        for (int i = 0; i < to_string(length).length(); i++)
+                        {
                             box.push_back(to_string(length)[i]);
                         }
                     }
@@ -77,19 +84,37 @@ public:
             }
             else
                 box.push_back('*');
+        
+        #ifdef _WIN32
+            static int color = 1;
+            if (highIndex == guideIndex)
+            {
+                SetConsoleTextAttribute(console, color);
+                color++;
+            }
 
-        cout << box << endl;
+            cout << box << endl;
+            SetConsoleTextAttribute(console, 15);
+        #elif __linux__
+            static int color = 30;
+            if (highIndex == guideIndex){
+                    cout << "\033[1;" << color << "m" << box << "\033[0m\n";
+                    color++;
+            }
+            else
+                cout << box << endl;
+        #endif
         count++;
         // this_thread::sleep_for(chrono::milliseconds(250)); uncomment for a surprise (jk)
 
-        if (count % size == 0 && count != size*size)
+        if (count % size == 0 && count != size * size)
         {
-            this_thread::sleep_for(chrono::milliseconds(1000));
-            #ifdef _WIN32
-                system("cls");
-            #elif __linux__
-                system("clear");
-            #endif
+            this_thread::sleep_for(chrono::milliseconds(500));
+        #ifdef _WIN32
+            system("cls");
+        #elif __linux__
+            system("clear");
+        #endif
         }
     }
 };
@@ -103,23 +128,22 @@ void bubbleSort(int arr[], int size, vector<Bar> sortedBars)
             if (arr[i] < arr[j])
                 swap(arr[i], arr[j]);
 
-            sortedBars.push_back(Bar(arr[j]));
+            sortedBars.push_back(Bar(arr[j], j, i));
         }
     }
 }
 
 int main()
 {
-    int list[] = {30, 25, 22, 6, 7, 9}; // ONLY EDIT THIS
+    int list[] = {30, 24, 1, 23, 15, 9, 7, 29}; // ONLY EDIT THIS
     size = sizeof(list) / sizeof(list[0]);
     vector<Bar> bars;
 
     bubbleSort(list, size, bars);
-    
+
     cout << "Sorted List: ";
     for (int i : list)
         cout << i << " ";
-    
 
     return 0;
 }
