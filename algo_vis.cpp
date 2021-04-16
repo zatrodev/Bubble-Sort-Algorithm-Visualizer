@@ -48,7 +48,9 @@ public:
                 {
                     if (j == WIDTH * length * 2)
                     {
-                        box.push_back(to_string(length)[0]);
+                        for (int i = 0; i < to_string(length).length(); i++){
+                            box.push_back(to_string(length)[i]);
+                        }
                     }
                     else
                     {
@@ -108,7 +110,7 @@ void bubbleSort(int arr[], int size, vector<Bar> sortedBars)
 
 int main()
 {
-    int list[] = {4, 5, 3, 9, 8}; // ONLY EDIT THIS
+    int list[] = {30, 25, 22, 6, 7, 9}; // ONLY EDIT THIS
     size = sizeof(list) / sizeof(list[0]);
     vector<Bar> bars;
 
