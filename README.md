@@ -1,4 +1,4 @@
-# Bubble-Sort-Algorithm-Visualizer
+# Bubble-Sort-Algorithm-Visualizer (Windows / Linux)
 A Bubble Sort Algorithm Visualizer made in pure C++.
 
 # NOTE:
