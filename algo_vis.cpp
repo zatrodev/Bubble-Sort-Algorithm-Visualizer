@@ -78,7 +78,7 @@ public:
 
         cout << box << endl;
         count++;
-        this_thread::sleep_for(chrono::milliseconds(250));
+        // this_thread::sleep_for(chrono::milliseconds(250)); uncomment for a surprise (jk)
 
         if (count % size == 0)
         {
