@@ -82,7 +82,7 @@ public:
         count++;
         // this_thread::sleep_for(chrono::milliseconds(250)); uncomment for a surprise (jk)
 
-        if (count % size == 0 && count != size*(size+1))
+        if (count % size == 0 && count != size*size)
         {
             this_thread::sleep_for(chrono::milliseconds(1000));
             #ifdef _WIN32
@@ -113,9 +113,6 @@ int main()
     int list[] = {30, 25, 22, 6, 7, 9}; // ONLY EDIT THIS
     size = sizeof(list) / sizeof(list[0]);
     vector<Bar> bars;
-
-    for (int i = 0; i < size; i++)
-        bars.push_back(Bar(list[i]));
 
     bubbleSort(list, size, bars);
     
