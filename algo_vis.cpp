@@ -3,8 +3,8 @@
 #include <vector>
 #include <chrono>
 #include <thread>
-#define LENGTH 4 // YOU CAN CHANGE THIS TOO
-#define WIDTH 4  // THIS TOO
+#define LENGTH 2 // YOU CAN CHANGE THIS
+#define WIDTH 2  // THIS TOO
 using namespace std;
 
 int count = 0;
@@ -82,7 +82,7 @@ public:
 
         if (count % size == 0)
         {
-            this_thread::sleep_for(chrono::milliseconds(750));
+            this_thread::sleep_for(chrono::milliseconds(1000));
             #ifdef _WIN32
                 system("cls");
             #elif __linux__
