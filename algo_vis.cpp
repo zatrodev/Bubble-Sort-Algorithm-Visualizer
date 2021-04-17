@@ -89,6 +89,8 @@ public:
             static int color = 1;
             if (highIndex == guideIndex)
             {
+                if (color > 15)
+                    color = 1;
                 SetConsoleTextAttribute(console, color);
                 color++;
             }
