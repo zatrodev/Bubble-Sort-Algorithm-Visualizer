@@ -121,7 +121,7 @@ public:
     }
 };
 
-void bubbleSort(int arr[], int size, vector<Bar> sortedBars)
+void bubbleSort(int arr[], int size, vector<Bar> &sortedBars)
 {
     for (int i = 0; i < size; i++)
     {
