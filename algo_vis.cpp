@@ -9,7 +9,6 @@ HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 #include <thread>
 #define LENGTH 2 // YOU CAN CHANGE THIS TOO
 #define WIDTH 2  // THIS TOO
-using namespace std;
 
 int count = 0;
 size_t size;
@@ -17,7 +16,7 @@ size_t size;
 class Bar
 {
 private:
-    string box;
+    std::string box;
 
 public:
     int length;
@@ -54,9 +53,9 @@ public:
                 {
                     if (j == WIDTH * length * 2)
                     {
-                        for (int i = 0; i < to_string(length).length(); i++)
+                        for (int i = 0; i < std::to_string(length).length(); i++)
                         {
-                            box.push_back(to_string(length)[i]);
+                            box.push_back(std::to_string(length)[i]);
                         }
                     }
                     else
@@ -100,18 +99,18 @@ public:
         #elif __linux__
             static int color = 30;
             if (highIndex == guideIndex){
-                    cout << "\033[1;" << color << "m" << box << "\033[0m\n";
+                    std::cout << "\033[1;" << color << "m" << box << "\033[0m\n";
                     color++;
             }
             else
-                cout << box << endl;
+                std::cout << box << std::endl;
         #endif
         count++;
         // this_thread::sleep_for(chrono::milliseconds(250)); uncomment for a surprise (jk)
 
         if (count % size == 0 && count != size * size)
         {
-            this_thread::sleep_for(chrono::milliseconds(500));
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
         #ifdef _WIN32
             system("cls");
         #elif __linux__
@@ -121,14 +120,14 @@ public:
     }
 };
 
-void bubbleSort(int arr[], int size, vector<Bar> &sortedBars)
+void bubbleSort(int arr[], int size, std::vector<Bar> &sortedBars)
 {
     for (int i = 0; i < size; i++)
     {
         for (int j = 0; j < size; j++)
         {
             if (arr[i] < arr[j])
-                swap(arr[i], arr[j]);
+                std::swap(arr[i], arr[j]);
 
             sortedBars.push_back(Bar(arr[j], j, i));
         }
@@ -139,13 +138,13 @@ int main()
 {
     int list[] = {30, 24, 1, 23, 15, 9, 7, 29}; // ONLY EDIT THIS
     size = sizeof(list) / sizeof(list[0]);
-    vector<Bar> bars;
+   std::vector<Bar> bars;
 
     bubbleSort(list, size, bars);
 
-    cout << "Sorted List: ";
+    std::cout << "Sorted List: ";
     for (int i : list)
-        cout << i << " ";
+        std::cout << i << " ";
 
     return 0;
 }
